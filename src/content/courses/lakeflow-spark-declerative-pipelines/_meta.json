@@ -1,0 +1,6 @@
+{
+  "title": "Lakeflow Spark Declarative Pipelines",
+  "description": "Learn how to build Spark declarative data pipelines using Lakeflow with Spark.",
+  "icon": "🔺",
+  "order": 6
+}

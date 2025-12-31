@@ -1,0 +1,22 @@
+server {
+    listen 80;
+    server_name your-domain.com; # Cseréld le a saját domainedre vagy IP címedre
+
+    root /var/www/teaching_goldhand_space; # A feltöltött build fájlok helye
+    index index.html;
+
+    # Gzip tömörítés bekapcsolása a gyorsabb betöltésért
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
+    location / {
+        # SPA routing támogatása: ha nem talál fájlt, az index.html-t szolgálja ki
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Statikus fájlok cache-elése (opcionális, de ajánlott)
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
+        expires 1y;
+        add_header Cache-Control "public, no-transform";
+    }
+}
