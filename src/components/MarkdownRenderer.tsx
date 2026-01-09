@@ -3,10 +3,44 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeRaw from "rehype-raw";
 import { Components } from "react-markdown";
+import { useState, useRef } from "react";
+import { Copy, Check } from "lucide-react";
+import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
-interface MarkdownRendererProps {
+interface CopyButtonProps {
   content: string;
 }
+
+const CopyButton = ({ content }: CopyButtonProps) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopied(true);
+      toast.success("Code copied to clipboard!");
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      toast.error("Failed to copy code.");
+    }
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className={cn(
+        "absolute top-3 right-3 p-1.5 rounded-md transition-all duration-200",
+        "bg-sidebar-border/50 hover:bg-sidebar-border text-sidebar-foreground/70 hover:text-sidebar-foreground",
+        "opacity-0 group-hover:opacity-100 focus:opacity-100 outline-none ring-1 ring-sidebar-border/50",
+        copied && "text-green-500 bg-green-500/10"
+      )}
+      title="Copy to clipboard"
+    >
+      {copied ? <Check size={14} /> : <Copy size={14} />}
+    </button>
+  );
+};
 
 const components: Components = {
   h1: ({ children, ...props }) => (

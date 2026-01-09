@@ -1,118 +1,214 @@
-# Python Basics
+# Data Types and Variables
 
-Let's dive into the fundamental building blocks of Python programming.
+In this section, we'll explore the fundamental building blocks of Python. Python is designed to be readable and intuitive, making it an excellent choice for complex data handling.
 
-## Variables and Data Types
+### Calculation
 
-Python supports several built-in data types:
+Python can be used as a powerful calculator. It supports standard arithmetic operators:
 
-### Numbers
+- `+` Addition
+- `-` Subtraction
+- `*` Multiplication
+- `/` Division (always returns a float)
+- `//` Floor Division (returns the integer part)
+- `%` Modulo (returns the remainder)
+- `**` Exponentiation (power)
 
 ```python
-# Integers
-age = 25
-year = 2024
+result = (50 - 5 * 6) / 4
+# Using an f-string to print the result
+print(f"The result of the calculation is: {result}") # The result of the calculation is: 5.0
 
-# Floats
-price = 19.99
-temperature = -3.5
-
-# Complex numbers
-complex_num = 3 + 4j
+print(f"17 divided by 3 is {17 // 3} with a remainder of {17 % 3}")
+print(f"Five squared is {5 ** 2}")
 ```
 
-### Strings
+### Comments
 
-Strings in Python are immutable sequences of characters:
+Comments are crucial for explaining *why* code does what it does.
 
 ```python
-# String declaration
-name = "Alice"
-message = 'Hello, World!'
+# This is a single-line comment
 
-# Multi-line strings
-poem = """
-Roses are red,
-Violets are blue,
-Python is awesome,
-And so are you!
 """
-
-# String operations
-full_name = "John" + " " + "Doe"  # Concatenation
-repeated = "Ha" * 3  # "HaHaHa"
+This is a multi-line string, 
+often used as a multi-line comment 
+to explain complex logic.
+"""
 ```
 
-### Lists
+## Data Types
 
-Lists are ordered, mutable collections:
+Python has several built-in data types that handle different kinds of information.
+
+### Type 1: Integers
+
+Integers are whole numbers without a fractional part. They can be positive, negative, or zero.
 
 ```python
-# Creating lists
-fruits = ["apple", "banana", "cherry"]
-numbers = [1, 2, 3, 4, 5]
-mixed = [1, "hello", 3.14, True]
-
-# List operations
-fruits.append("orange")    # Add item
-fruits.remove("banana")    # Remove item
-first = fruits[0]          # Access by index
-sliced = fruits[1:3]       # Slicing
+count = 100
+negative_val = -50
 ```
 
-## Control Flow
+### Type 2: Float
 
-### Conditional Statements
+Floats (floating-point numbers) represent real numbers and are written with a decimal point.
 
 ```python
-age = 18
-
-if age < 13:
-    print("Child")
-elif age < 20:
-    print("Teenager")
-else:
-    print("Adult")
+price = 19.99
+pi = 3.14159
 ```
 
-### Loops
+### An Aside on Numeric Precision
+
+Floating-point numbers can sometimes lead to unexpected results due to how computers represent decimals in binary.
 
 ```python
-# For loop
-for fruit in fruits:
-    print(fruit)
-
-# While loop
-count = 0
-while count < 5:
-    print(count)
-    count += 1
-
-# Range
-for i in range(10):
-    print(i)
+print(0.1 + 0.2) # 0.30000000000000004
 ```
+> [!NOTE]
+> For financial applications where precision is critical, Python provides the `decimal` module.
 
-## Functions
+### Type 3: Strings
 
-Functions help organize and reuse code:
+Strings are sequences of characters used for text.
 
 ```python
-def calculate_area(length, width):
-    """Calculate the area of a rectangle."""
-    return length * width
-
-# Function call
-area = calculate_area(5, 3)
-print(f"Area: {area}")  # Area: 15
+name = "Python"
+greeting = 'Hello'
 ```
 
-### Default Parameters
+#### Multi-line strings
+
+You can define strings that span multiple lines using triple quotes (`"""` or `'''`).
 
 ```python
-def greet(name, greeting="Hello"):
-    return f"{greeting}, {name}!"
-
-print(greet("Alice"))           # Hello, Alice!
-print(greet("Bob", "Hi"))       # Hi, Bob!
+long_text = """
+This is a string that
+spans across multiple
+lines easily.
+"""
 ```
+
+### Type 4: Boolean
+
+Booleans represent one of two values: `True` or `False`. They are essential for logic and control flow.
+
+```python
+is_active = True
+has_permission = False
+```
+
+## Variables
+
+Variables are containers for storing data values.
+
+### Variable State
+
+In Python, variables are essentially labels attached to objects in memory. The "state" of a variable can change as your program runs.
+
+```python
+x = 5  # x refers to the integer 5
+x = "Hello" # x now refers to the string "Hello"
+```
+
+### Weakly Typed Languages
+
+Python is a **dynamically typed** (often called weakly typed in casual conversation, though technically "strong dynamic") language. This means you don't need to declare the variable type; Python figures it out at runtime.
+
+### Naming Conventions
+
+Following PEP 8, variable names should be:
+- Descriptive
+- Lowercase
+- Use underscores to separate words (`snake_case`)
+
+```python
+# Good
+user_age = 25
+
+# Bad
+A = 25
+UserAge = 25
+```
+
+## Print Statements
+
+The `print()` function outputs data to the console.
+
+### f-string Formatting
+
+Introduced in Python 3.6, f-strings (formatted string literals) are the most readable and efficient way to format strings.
+
+```python
+name = "Alice"
+age = 30
+pi = 3.14159265
+
+# Basic interpolation
+print(f"My name is {name} and I am {age} years old.")
+
+# Expression evaluation
+print(f"In 5 years, I will be {age + 5} years old.")
+
+# Number formatting (rounding to 2 decimal places)
+print(f"Pi to two decimal places is {pi:.2f}")
+
+# Alignment and Padding
+print(f"|{'Left':<10}|{'Center':^10}|{'Right':>10}|")
+```
+
+### Ternary Operator
+
+The ternary operator allows for a simple `if-else` on a single line.
+
+```python
+status = "Adult" if age >= 18 else "Minor"
+print(status)
+```
+
+---
+
+## 🛠️ Practice Tasks
+
+Test your knowledge with these tasks!
+
+### Task 1: The Tip Calculator
+Create a program that calculates the total bill including a 15% tip.
+Variables: `bill_amount = 120.50`
+
+<details>
+<summary>💡 Hint</summary>
+Multiply the bill amount by 1.15 to get the total.
+</details>
+
+<details>
+<summary>✅ Solution</summary>
+
+```python
+bill_amount = 120.50
+total = bill_amount * 1.15
+print(f"Total bill with tip: ${total:.2f}")
+```
+</details>
+
+### Task 2: String Manipulator
+Take the variable `word = "Python"` and print it 3 times on the same line, separated by spaces.
+
+<details>
+<summary>💡 Hint</summary>
+You can use the `*` operator on strings or f-strings.
+</details>
+
+<details>
+<summary>✅ Solution</summary>
+
+```python
+word = "Python"
+# Approach 1
+print(f"{word} {word} {word}")
+
+# Approach 2
+print((word + " ") * 3)
+```
+</details>
