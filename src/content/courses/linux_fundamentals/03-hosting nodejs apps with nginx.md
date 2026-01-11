@@ -27,15 +27,13 @@ Paste the following configuration:
 ```nginx
 server {
     listen 80;
-    server_name myapp.com www.myapp.com;
+    server_name teaching.goldhand.space;
+
+    root /var/www/teaching;
+    index index.html;
 
     location / {
-        proxy_pass http://localhost:3000; # Forward requests to Node.js
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
+        try_files $uri $uri/ /index.html;
     }
 }
 ```
